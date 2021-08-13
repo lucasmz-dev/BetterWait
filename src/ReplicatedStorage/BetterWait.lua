@@ -11,26 +11,25 @@ RunService.Stepped:Connect(function(_, deltaTime)
 
 	local currentYield = NextYield
 	while currentYield ~= nil do
-		local spent = TimePassed - currentYield[3]
+		local spent = TimePassed - currentYield[1]
 
-		local _next = currentYield[1]
+		local _next = currentYield[4]
+		local _prev = currentYield[5]
 
-		if spent >= currentYield[4] then
-			local _prev = currentYield[2]
-
+		if spent >= currentYield[2] then
 			if _next ~= nil then
-				_next[2] = _prev
+				_next[5] = _prev
 			end
 
 			if _prev ~= nil then
-				_prev[1] = _next
+				_prev[4] = _next
 				
-			else -- Current yield is the head (NextYield)
+			else -- Current yield is the head (NextYield)20
 				NextYield = _next
 			end
 
 			t_defer(
-				currentYield[5],
+				currentYield[3],
 				spent
 			)
 		end
@@ -44,15 +43,15 @@ return function(n)
 
 	do
 		local yield = {
-			NextYield, -- _next
-			nil, -- _prev
 			TimePassed,
 			n,
-			c_running()
+			c_running(),
+			NextYield, -- _next
+			nil, -- _prev
 		}
 
 		if NextYield ~= nil then
-			NextYield[2] = yield
+			NextYield[5] = yield
 		end
 
 		NextYield = yield
