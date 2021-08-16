@@ -24,7 +24,7 @@ RunService.Stepped:Connect(function(_, deltaTime)
 			if _prev ~= nil then
 				_prev[4] = _next
 				
-			else -- Current yield is the head (NextYield)20
+			else -- Current yield is the head (NextYield)
 				NextYield = _next
 			end
 
