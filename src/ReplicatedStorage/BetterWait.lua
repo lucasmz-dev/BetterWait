@@ -6,7 +6,7 @@ local c_running = coroutine.running
 local c_yield = coroutine.yield
 local t_defer = task.defer
 
-RunService.Stepped:Connect(function(_, deltaTime)
+RunService.Heartbeat:Connect(function(deltaTime)
 	TimePassed += deltaTime
 
 	local currentYield = NextYield
