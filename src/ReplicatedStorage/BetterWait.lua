@@ -2,10 +2,6 @@ local RunService = game:GetService("RunService")
 local TimePassed = 0
 local NextYield = nil
 
-local c_running = coroutine.running
-local c_yield = coroutine.yield
-local t_defer = task.defer
-
 RunService.Heartbeat:Connect(function(deltaTime)
 	TimePassed += deltaTime
 
@@ -28,7 +24,7 @@ RunService.Heartbeat:Connect(function(deltaTime)
 				NextYield = _next
 			end
 
-			t_defer(
+			task.defer(
 				currentYield[3],
 				spent
 			)
@@ -45,7 +41,7 @@ return function(n)
 		local yield = {
 			TimePassed,
 			n,
-			c_running(),
+			coroutine.running(),
 			NextYield, -- _next
 			nil, -- _prev
 		}
@@ -57,5 +53,5 @@ return function(n)
 		NextYield = yield
 	end
 
-	return c_yield()
+	return coroutine.yield()
 end
