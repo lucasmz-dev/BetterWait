@@ -10,9 +10,10 @@ RunService.Heartbeat:Connect(function(deltaTime: number)
 		local spent: number = TimePassed - currentYield[1]
 
 		local _next = currentYield[4]
-		local _prev = currentYield[5]
 
 		if spent >= currentYield[2] then
+			local _prev = currentYield[5]
+
 			if _next ~= nil then
 				_next[5] = _prev
 			end
