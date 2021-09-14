@@ -1,13 +1,13 @@
-local RunService = game:GetService("RunService")
-local TimePassed = 0
+local RunService: RunService = game:GetService("RunService")
+local TimePassed: number = 0
 local NextYield = nil
 
-RunService.Heartbeat:Connect(function(deltaTime)
+RunService.Heartbeat:Connect(function(deltaTime: number)
 	TimePassed += deltaTime
 
 	local currentYield = NextYield
 	while currentYield ~= nil do
-		local spent = TimePassed - currentYield[1]
+		local spent: number = TimePassed - currentYield[1]
 
 		local _next = currentYield[4]
 		local _prev = currentYield[5]
@@ -19,7 +19,6 @@ RunService.Heartbeat:Connect(function(deltaTime)
 
 			if _prev ~= nil then
 				_prev[4] = _next
-				
 			else -- Current yield is the head (NextYield)
 				NextYield = _next
 			end
@@ -34,7 +33,7 @@ RunService.Heartbeat:Connect(function(deltaTime)
 	end
 end)
 
-return function(n)
+return function(n: number?): number
 	n = typeof(n) == 'number' and n or 0
 
 	do
