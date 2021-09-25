@@ -1,6 +1,6 @@
-# BetterWait
+# Use `task.wait` instead!
 
-### For any work that depends on DeltaTime, something like UI or something like it, I recommend testing this out. Otherwise, you're fine with `task.wait`.
+# BetterWait
 
 For those, who want to test this out and figure out what it's good with, here's some things:
 
